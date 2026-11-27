@@ -41,7 +41,7 @@ const { project, locale } = Astro.props;
     border-radius: var(--radius);
     transition: border-color 150ms, transform 150ms;
   }
-  .card:hover { border-color: var(--accent-2); transform: translateY(-2px); }
+  .card:hover { border-color: var(--ink); transform: translateY(-2px); }
   .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); }
   .card-name { font-size: 1.125rem; }
   .card-org { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
@@ -68,7 +68,7 @@ const { project, locale } = Astro.props;
     background: var(--surface); color: var(--ink); cursor: pointer; font-size: 0.75rem;
     font-family: 'Space Grotesk', sans-serif;
   }
-  .copy-btn:hover { background: var(--accent-2); color: #fff; }
+  .copy-btn:hover { background: var(--ink); color: #fff; }
   .card-foot { display: flex; gap: var(--space-3); margin-top: auto; padding-top: var(--space-2); }
   .card-link { font-size: 0.8125rem; }
 </style>

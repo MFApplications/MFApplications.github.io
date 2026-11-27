@@ -20,6 +20,7 @@ export interface Family {
   name: string;
   org: string;
   url: string;
+  avatar: string;
   description: { en: string; es: string };
   projects: Project[];
 }
@@ -30,6 +31,7 @@ export const families: Family[] = [
     name: 'ScrapMF',
     org: 'Scrap-MF',
     url: 'https://github.com/Scrap-MF',
+    avatar: '/orgs/scrap-mf.png',
     description: {
       en: 'Archiving and cookie tooling for social media galleries.',
       es: 'Herramientas de archivado y cookies para galerías de redes sociales.',
@@ -97,6 +99,7 @@ export const families: Family[] = [
     name: 'ExtractorsMF',
     org: 'ExtractorsMF',
     url: 'https://github.com/ExtractorsMF',
+    avatar: '/orgs/extractorsmf.png',
     description: {
       en: 'Media downloaders for Threads and TikTok with a Python library and CLI.',
       es: 'Descargadores de media para Threads y TikTok con biblioteca Python y CLI.',
@@ -145,6 +148,7 @@ export const families: Family[] = [
     name: 'AlejandraDB',
     org: 'AlejandraDB-MF',
     url: 'https://github.com/AlejandraDB-MF',
+    avatar: '/orgs/alejandradb-mf.png',
     description: {
       en: 'Android device management from the terminal.',
       es: 'Gestión de dispositivos Android desde la terminal.',
@@ -176,6 +180,7 @@ export const families: Family[] = [
     name: 'MFApplications',
     org: 'MFApplications',
     url: 'https://github.com/MFApplications',
+    avatar: '/orgs/mfapplications.png',
     description: {
       en: 'Desktop apps for managing cloud storage.',
       es: 'Apps de escritorio para gestionar almacenamiento en la nube.',

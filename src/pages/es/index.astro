@@ -2,8 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
-import FamilySection from '../../components/FamilySection.astro';
-import Install from '../../components/Install.astro';
+import OrgCard from '../../components/OrgCard.astro';
 import About from '../../components/About.astro';
 import Footer from '../../components/Footer.astro';
 import { families } from '../../data/projects';
@@ -14,9 +13,19 @@ const locale = 'es';
   <Header locale={locale} />
   <main id="main">
     <Hero locale={locale} />
-    {families.map((f) => <FamilySection family={f} locale={locale} />)}
-    <Install locale={locale} />
+    <section class="section orgs-intro">
+      <div class="container">
+        <h2>{t(locale, 'orgs.title')}</h2>
+        <p class="section-lead">{t(locale, 'orgs.lead')}</p>
+      </div>
+    </section>
+    {families.map((f) => <OrgCard family={f} locale={locale} />)}
     <About locale={locale} />
   </main>
   <Footer locale={locale} />
 </BaseLayout>
+
+<style is:global>
+  .orgs-intro { padding: var(--space-7) 0 var(--space-3); }
+  .section-lead { color: var(--muted); margin-bottom: var(--space-5); }
+</style>

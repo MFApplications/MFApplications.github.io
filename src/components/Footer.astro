@@ -6,7 +6,7 @@ const { locale } = Astro.props;
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>{t(locale, 'footer.license')}</p>
-    <p>{t(locale, 'footer.built')}</p>
+    <p><a href="https://ko-fi.com/mfapplications" rel="noopener" target="_blank">{t(locale, 'footer.kofi')}</a> · {t(locale, 'footer.built')}</p>
   </div>
 </footer>
 

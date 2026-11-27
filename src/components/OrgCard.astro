@@ -1,0 +1,102 @@
+---
+import { t } from '../i18n/ui';
+import type { Family } from '../data/projects';
+interface Props { family: Family; locale: 'en' | 'es'; }
+const { family, locale } = Astro.props;
+const base = import.meta.env.BASE_URL || '/';
+const avatar = (base.endsWith('/') ? base : base + '/') + family.avatar.replace(/^\//, '');
+---
+<section id={family.id} class="section org">
+  <div class="container">
+    <header class="org-head">
+      <img class="org-avatar" src={avatar} alt={family.org} width="64" height="64" loading="lazy" />
+      <div>
+        <p class="org-name">{family.org}</p>
+        <h2>{family.name}</h2>
+        <p class="org-desc">{family.description[locale]}</p>
+        <a class="org-link" href={family.url} rel="noopener" target="_blank">{family.url.replace('https://github.com/', '')} ↗</a>
+      </div>
+    </header>
+    <div class="project-list">
+      {family.projects.map((p) => (
+        <article class="project">
+          <div class="project-top">
+            <h3 class="project-name">{p.name}</h3>
+            <span class="project-meta">{p.language} · {p.license}{p.release ? ` · ${p.release}` : ''}</span>
+          </div>
+          <p class="project-desc">{p.description[locale]}</p>
+          <details class="project-details">
+            <summary>{t(locale, 'card.details')}</summary>
+            <ul class="project-features">
+              {p.features[locale].map((f) => <li>{f}</li>)}
+            </ul>
+            {p.install && (
+              <div class="project-install">
+                <code class="install-cmd">{p.install}</code>
+                <button class="copy-btn" type="button" data-copy={p.install} data-copied={t(locale, 'card.copied')} aria-label={t(locale, 'card.copy')}>
+                  {t(locale, 'card.copy')}
+                </button>
+              </div>
+            )}
+          </details>
+          <div class="project-links">
+            <a href={p.url} rel="noopener" target="_blank">{t(locale, 'card.repo')} ↗</a>
+            {p.docsUrl && <a href={p.docsUrl} rel="noopener" target="_blank">{t(locale, 'card.docs')} ↗</a>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: var(--space-7) 0; border-top: 1px solid var(--border); }
+  .section:first-of-type { border-top: 0; }
+  .org-head {
+    display: flex; gap: var(--space-5); align-items: flex-start;
+    margin-bottom: var(--space-5);
+  }
+  .org-avatar {
+    width: 64px; height: 64px; border-radius: 8px;
+    border: 1px solid var(--border); flex-shrink: 0;
+  }
+  .org-name {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+    color: var(--muted); margin: 0 0 var(--space-1); text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .org-desc { color: var(--muted); margin: var(--space-2) 0; max-width: 60ch; }
+  .org-link { font-size: 0.8125rem; }
+  .project-list { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .project-list { grid-template-columns: repeat(2, 1fr); } }
+  .project {
+    padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .project-top { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); flex-wrap: wrap; }
+  .project-name { font-size: 1.0625rem; margin: 0; }
+  .project-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+  .project-desc { font-size: 0.9375rem; color: var(--muted); margin: var(--space-2) 0; }
+  .project-details { margin: var(--space-2) 0; }
+  .project-details summary {
+    cursor: pointer; font-size: 0.8125rem; color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif; font-weight: 500;
+  }
+  .project-features { margin: var(--space-2) 0 0; padding-left: 1.1em; font-size: 0.875rem; color: var(--ink); }
+  .project-features li { margin-bottom: 2px; }
+  .project-install {
+    display: flex; align-items: stretch; gap: 0; margin-top: var(--space-2);
+    border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+  }
+  .install-cmd {
+    flex: 1; padding: 8px 10px; font-size: 0.75rem; background: var(--bg);
+    overflow-x: auto; white-space: nowrap; color: var(--ink);
+  }
+  .copy-btn {
+    padding: 0 12px; border: 0; border-left: 1px solid var(--border);
+    background: var(--surface); color: var(--ink); cursor: pointer; font-size: 0.75rem;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .copy-btn:hover { background: var(--ink); color: var(--bg); }
+  .project-links { display: flex; gap: var(--space-3); margin-top: var(--space-2); }
+  .project-links a { font-size: 0.8125rem; }
+</style>

@@ -11,7 +11,8 @@ const toolNames = ['scrapmf', 'threadstractor', 'tikstractor', 'alejandradb', 'r
       <h1>{t(locale, 'hero.title')}</h1>
       <p class="hero-lead">{t(locale, 'hero.lead')}</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#tools">{t(locale, 'hero.cta.primary')}</a>
+        <a class="btn btn-primary" href="#scrap-mf">{t(locale, 'hero.cta.primary')}</a>
+        <a class="btn btn-kofi" href="https://ko-fi.com/mfapplications" rel="noopener" target="_blank">{t(locale, 'hero.cta.kofi')}</a>
         <a class="btn btn-ghost" href="https://github.com/MFApplications" rel="noopener" target="_blank">{t(locale, 'hero.cta.secondary')}</a>
       </div>
     </div>
@@ -85,7 +86,9 @@ const toolNames = ['scrapmf', 'threadstractor', 'tikstractor', 'alejandradb', 'r
   .btn-primary { background: var(--ink); color: var(--bg); }
   .btn-primary:hover { background: var(--accent); color: #fff; }
   .btn-ghost { border-color: var(--border); color: var(--ink); }
-  .btn-ghost:hover { border-color: var(--accent-2); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .btn-kofi { background: var(--kofi); color: #fff; border-color: var(--kofi); }
+  .btn-kofi:hover { opacity: 0.85; background: var(--kofi); }
   .hero-terminal {
     background: var(--surface);
     border: 1px solid var(--border);
