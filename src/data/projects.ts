@@ -183,8 +183,8 @@ export const families: Family[] = [
     url: 'https://github.com/MFApplications',
     avatar: '/orgs/mfapplications.png',
     description: {
-      en: 'Desktop apps for managing cloud storage.',
-      es: 'Apps de escritorio para gestionar almacenamiento en la nube.',
+      en: 'Independent applications by MFApplications.',
+      es: 'Aplicaciones independientes de MFApplications.',
     },
     projects: [
       {
