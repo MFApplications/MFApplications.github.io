@@ -3,8 +3,9 @@ export type Category = 'archiver' | 'downloader' | 'device' | 'desktop' | 'exten
 export interface Project {
   id: string;
   name: string;
-  repo: string;
-  url: string;
+  repo?: string;
+  url?: string;
+  placeholder?: boolean;
   language: string;
   license: string;
   category: Category;
@@ -203,6 +204,20 @@ export const families: Family[] = [
           en: ['Multi-profile management', 'Remote and union creation', 'Dry-run sync by default', 'Mount with rclone mount --daemon', 'Flatpak with host rclone', 'GTK4/libadwaita UI'],
           es: ['Gestión multi-perfil', 'Creación de remotos y uniones', 'Sincronización dry-run por defecto', 'Montaje con rclone mount --daemon', 'Flatpak con rclone del host', 'UI GTK4/libadwaita'],
         },
+      },
+      {
+        id: 'coming-soon',
+        name: 'Coming soon',
+        placeholder: true,
+        url: 'https://github.com/MFApplications',
+        language: '—',
+        license: '—',
+        category: 'desktop',
+        description: {
+          en: 'More independent applications from MFApplications are on the way.',
+          es: 'Más aplicaciones independientes de MFApplications están en camino.',
+        },
+        features: { en: [], es: [] },
       },
     ],
   },
