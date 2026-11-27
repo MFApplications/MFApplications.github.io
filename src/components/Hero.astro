@@ -18,6 +18,7 @@ const toolNames = ['scrapmf', 'threadstractor', 'tikstractor', 'alejandradb', 'r
     </div>
     <div class="hero-terminal" aria-label={t(locale, 'hero.terminal.label')}>
       <div class="term-bar">
+        <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
         <span class="term-title">mfapplications</span>
       </div>
       <div class="term-body">
@@ -34,6 +35,12 @@ const toolNames = ['scrapmf', 'threadstractor', 'tikstractor', 'alejandradb', 'r
   const el = document.getElementById('term-typed');
   if (el) {
     const tools = (el.dataset.tools || '').split(',');
+    const colors = {
+      scrapmf: '#e5484d', eldevoracucas: '#e5484d',
+      threadstractor: '#2e5c8a', tikstractor: '#2e5c8a',
+      alejandradb: '#16a34a',
+      rcsyncitmf: 'var(--ink)'
+    };
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
       el.textContent = tools.join(' · ');
@@ -43,6 +50,7 @@ const toolNames = ['scrapmf', 'threadstractor', 'tikstractor', 'alejandradb', 'r
       let deleting = false;
       const type = () => {
         const word = tools[idx];
+        el.style.color = colors[word] || 'var(--ink)';
         if (!deleting) {
           el.textContent = word.slice(0, i + 1);
           i++;
@@ -83,7 +91,7 @@ const toolNames = ['scrapmf', 'threadstractor', 'tikstractor', 'alejandradb', 'r
   }
   .btn:hover { text-decoration: none; transform: translateY(-1px); }
   .btn-primary { background: var(--ink); color: var(--bg); }
-  .btn-primary:hover { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--kofi); color: #fff; }
   .btn-ghost { border-color: var(--border); color: var(--ink); }
   .btn-ghost:hover { border-color: var(--ink); }
   .btn-kofi { background: var(--kofi); color: #fff; border-color: var(--kofi); }
@@ -102,9 +110,12 @@ const toolNames = ['scrapmf', 'threadstractor', 'tikstractor', 'alejandradb', 'r
   .term-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
   .term-title { margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
   .term-body { padding: 24px 18px; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; min-height: 60px; }
-  .term-prompt { color: var(--accent); margin-right: 8px; }
+  .term-prompt { color: #16a34a; margin-right: 8px; font-weight: 700; }
+  .term-dot:nth-child(1) { background: #ff5f57; }
+  .term-dot:nth-child(2) { background: #febc2e; }
+  .term-dot:nth-child(3) { background: #28c840; }
   .term-caret {
-    display: inline-block; width: 9px; height: 1.1em; background: var(--accent);
+    display: inline-block; width: 9px; height: 1.1em; background: var(--kofi);
     vertical-align: text-bottom; margin-left: 2px; animation: blink 1s steps(2) infinite;
   }
   @keyframes blink { 50% { opacity: 0; } }
