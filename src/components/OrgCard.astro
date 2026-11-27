@@ -13,14 +13,14 @@ const avatar = (base.endsWith('/') ? base : base + '/') + family.avatar.replace(
       <p class="org-name">{family.org}</p>
       <h2>{family.name}</h2>
       <p class="org-desc">{family.description[locale]}</p>
-      <a class="org-link" href={family.url} rel="noopener" target="_blank">{family.url.replace('https://github.com/', '')} ↗</a>
+      <a class="org-link" href={family.url} rel="noopener" target="_blank">{family.url.replace('https://github.com/', '')}</a>
     </header>
     <div class="project-list">
       {family.projects.map((p) => (
         <article class={`project ${p.placeholder ? 'is-placeholder' : ''}`}>
           <div class="project-top">
             <h3 class="project-name">{p.placeholder ? t(locale, 'coming.title') : p.name}</h3>
-            {!p.placeholder && <span class="project-meta">{p.language} · {p.license}{p.release ? ` · ${p.release}` : ''}</span>}
+            {!p.placeholder && <span class="project-meta">{p.language}, {p.license}{p.release ? `, ${p.release}` : ''}</span>}
           </div>
           <p class="project-desc">{p.description[locale]}</p>
           {!p.placeholder && (
@@ -40,8 +40,8 @@ const avatar = (base.endsWith('/') ? base : base + '/') + family.avatar.replace(
                 )}
               </details>
               <div class="project-links">
-                {p.url && <a href={p.url} rel="noopener" target="_blank">{t(locale, 'card.repo')} ↗</a>}
-                {p.docsUrl && <a href={p.docsUrl} rel="noopener" target="_blank">{t(locale, 'card.docs')} ↗</a>}
+                {p.url && <a href={p.url} rel="noopener" target="_blank">{t(locale, 'card.repo')}</a>}
+                {p.docsUrl && <a href={p.docsUrl} rel="noopener" target="_blank">{t(locale, 'card.docs')}</a>}
               </div>
             </>
           )}
@@ -68,8 +68,8 @@ const avatar = (base.endsWith('/') ? base : base + '/') + family.avatar.replace(
     border: 1px solid var(--border);
   }
   .org-name {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
-    color: var(--muted); margin: 0; text-transform: uppercase; letter-spacing: 0.05em;
+    font-size: 0.8125rem; color: var(--muted); margin: 0;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 500;
   }
   .org-head h2 { margin: 0; }
   .org-desc { color: var(--muted); margin: var(--space-2) 0 0; max-width: 60ch; }
@@ -89,7 +89,7 @@ const avatar = (base.endsWith('/') ? base : base + '/') + family.avatar.replace(
   .project.is-placeholder .project-name { color: var(--muted); }
   .project-top { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); flex-wrap: wrap; }
   .project-name { font-size: 1.0625rem; margin: 0; }
-  .project-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+  .project-meta { font-size: 0.75rem; color: var(--muted); }
   .project-desc { font-size: 0.9375rem; color: var(--muted); margin: var(--space-2) 0; }
   .project-details { margin: var(--space-2) 0; }
   .project-details summary {

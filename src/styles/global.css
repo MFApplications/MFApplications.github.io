@@ -4,7 +4,7 @@
   --surface: #ffffff;
   --ink: #0a0a0a;
   --muted: #525252;
-  --kofi: #ff5e5b;
+  --kofi: #e5484d;
   --border: #e5e5e5;
   --radius: 6px;
   --container: 1200px;
@@ -24,7 +24,7 @@
     --surface: #141414;
     --ink: #fafafa;
     --muted: #a3a3a3;
-    --kofi: #ff5e5b;
+    --kofi: #e5484d;
     --border: #262626;
   }
 }
