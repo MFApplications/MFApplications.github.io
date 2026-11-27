@@ -4,8 +4,7 @@ export const ui = {
   en: {
     'site.title': 'MFApplications — open-source tools for archiving, downloading, and device management',
     'site.description': 'A catalog of open-source utilities by MFApplications: social media archivers, media downloaders, Android device tools, rclone managers, and browser extensions.',
-    'nav.tools': 'Tools',
-    'nav.install': 'Install',
+    'nav.projects': 'Projects',
     'nav.about': 'About',
     'nav.github': 'GitHub',
     'hero.eyebrow': 'MFApps',
@@ -42,8 +41,7 @@ export const ui = {
   es: {
     'site.title': 'MFApplications — herramientas open source para archivar, descargar y gestionar dispositivos',
     'site.description': 'Catálogo de utilidades open source de MFApplications: archivadores de redes sociales, descargadores de media, herramientas para Android, gestores de rclone y extensiones de navegador.',
-    'nav.tools': 'Herramientas',
-    'nav.install': 'Instalar',
+    'nav.projects': 'Proyectos',
     'nav.about': 'Acerca de',
     'nav.github': 'GitHub',
     'hero.eyebrow': 'MFApps',
