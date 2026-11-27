@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/jetbrains-mono/400.css';
+
+interface Props {
+  locale: 'en' | 'es';
+  title: string;
+  description: string;
+}
+const { locale, title, description } = Astro.props;
+const altLocale = locale === 'en' ? 'es' : 'en';
+const altPath = locale === 'en' ? '/es/' : '/';
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')}favicon.svg`} />
+    <link rel="alternate" hreflang={locale} href={Astro.url.href} />
+    <link rel="alternate" hreflang={altLocale} href={new URL(altPath, Astro.site).href} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+    <script is:inline>
+      document.addEventListener('click', async (e) => {
+        const btn = e.target && e.target.closest ? e.target.closest('.copy-btn') : null;
+        if (!btn) return;
+        const val = btn.getAttribute('data-copy') || '';
+        try {
+          await navigator.clipboard.writeText(val);
+          const original = btn.textContent;
+          btn.textContent = btn.dataset.copied || 'Copied';
+          setTimeout(() => { btn.textContent = original; }, 1400);
+        } catch {}
+      });
+    </script>
+  </body>
+</html>

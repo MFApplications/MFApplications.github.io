@@ -1,0 +1,68 @@
+---
+import { t } from '../i18n/ui';
+import type { Project } from '../data/projects';
+interface Props { project: Project; locale: 'en' | 'es'; }
+const { project, locale } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<article class="card" data-category={project.category}>
+  <header class="card-head">
+    <h3 class="card-name">{project.name}</h3>
+    <span class="card-org">{project.org}</span>
+  </header>
+  <p class="card-desc">{project.description[locale]}</p>
+  <dl class="card-meta">
+    <div><dt>Lang</dt><dd>{project.language}</dd></div>
+    <div><dt>License</dt><dd>{project.license}</dd></div>
+    {project.release && <div><dt>{t(locale, 'card.release')}</dt><dd>{project.release}</dd></div>}
+  </dl>
+  {project.install && (
+    <div class="card-install">
+      <code class="install-cmd">{project.install}</code>
+      <button class="copy-btn" type="button" data-copy={project.install} data-copied={t(locale, 'card.copied')} aria-label={t(locale, 'card.copy')}>
+        {t(locale, 'card.copy')}
+      </button>
+    </div>
+  )}
+  <footer class="card-foot">
+    <a class="card-link" href={project.url} rel="noopener" target="_blank">{t(locale, 'card.repo')} ↗</a>
+    {project.docsUrl && <a class="card-link" href={project.docsUrl} rel="noopener" target="_blank">{t(locale, 'card.docs')} ↗</a>}
+  </footer>
+</article>
+
+
+<style>
+  .card {
+    display: flex; flex-direction: column; gap: var(--space-3);
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color 150ms, transform 150ms;
+  }
+  .card:hover { border-color: var(--accent-2); transform: translateY(-2px); }
+  .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); }
+  .card-name { font-size: 1.125rem; }
+  .card-org { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+  .card-desc { font-size: 0.9375rem; color: var(--muted); margin: 0; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0; }
+  .card-meta div { display: flex; gap: 4px; align-items: baseline; }
+  .card-meta dt { font-size: 0.75rem; color: var(--muted); text-transform: none; }
+  .card-meta dd { margin: 0; font-size: 0.8125rem; font-family: 'JetBrains Mono', monospace; }
+  .card-install {
+    display: flex; align-items: stretch; gap: 0;
+    border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+  }
+  .install-cmd {
+    flex: 1; padding: 8px 10px; font-size: 0.75rem; background: var(--bg);
+    overflow-x: auto; white-space: nowrap; color: var(--ink);
+  }
+  .copy-btn {
+    padding: 0 12px; border: 0; border-left: 1px solid var(--border);
+    background: var(--surface); color: var(--ink); cursor: pointer; font-size: 0.75rem;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .copy-btn:hover { background: var(--accent-2); color: #fff; }
+  .card-foot { display: flex; gap: var(--space-3); margin-top: auto; padding-top: var(--space-2); }
+  .card-link { font-size: 0.8125rem; }
+</style>

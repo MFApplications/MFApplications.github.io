@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import Install from '../../components/Install.astro';
+import About from '../../components/About.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n/ui';
+const locale = 'es';
+---
+<BaseLayout locale={locale} title={t(locale, 'site.title')} description={t(locale, 'site.description')}>
+  <Header locale={locale} />
+  <main id="main">
+    <Hero locale={locale} />
+    <ProjectGrid locale={locale} />
+    <Install locale={locale} />
+    <About locale={locale} />
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import { t } from '../i18n/ui';
+interface Props { locale: 'en' | 'es'; }
+const { locale } = Astro.props;
+const commands = [
+  { label: 'ScrapMF', cmd: 'curl -fsSL https://raw.githubusercontent.com/Scrap-MF/ScrapMF-Rust-CLI/main/install.sh | sh' },
+  { label: 'AlejandraDB', cmd: 'curl -fsSL https://raw.githubusercontent.com/AlejandraDB-MF/AlejandraDB-CLI/main/install.sh | sh' },
+];
+---
+<section id="install" class="section">
+  <div class="container">
+    <h2>{t(locale, 'install.title')}</h2>
+    <p class="section-lead">{t(locale, 'install.lead')}</p>
+    <div class="install-list">
+      {commands.map((c) => (
+        <div class="install-row">
+          <span class="install-label">{c.label}</span>
+          <code class="install-cmd">{c.cmd}</code>
+          <button class="copy-btn" type="button" data-copy={c.cmd} data-copied={t(locale, 'card.copied')} aria-label={t(locale, 'card.copy')}>
+            {t(locale, 'card.copy')}
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+<style>
+  .section { padding: var(--space-7) 0; }
+  .section-lead { color: var(--muted); margin-bottom: var(--space-5); }
+  .install-list { display: flex; flex-direction: column; gap: var(--space-3); }
+  .install-row {
+    display: grid; grid-template-columns: 120px 1fr auto; gap: var(--space-3);
+    align-items: center; padding: var(--space-3) var(--space-4);
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  }
+  .install-label { font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
+  .install-cmd { font-size: 0.8125rem; overflow-x: auto; white-space: nowrap; }
+  .copy-btn {
+    padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--surface); color: var(--ink); cursor: pointer; font-size: 0.75rem;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .copy-btn:hover { background: var(--accent-2); color: #fff; border-color: var(--accent-2); }
+  @media (max-width: 640px) {
+    .install-row { grid-template-columns: 1fr; }
+  }
+</style>

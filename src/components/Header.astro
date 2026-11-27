@@ -1,0 +1,61 @@
+---
+import { t } from '../i18n/ui';
+interface Props { locale: 'en' | 'es'; }
+const { locale } = Astro.props;
+const rawBase = import.meta.env.BASE_URL || '/';
+const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
+const homePath = base + '/';
+const altPath = locale === 'en' ? base + '/es/' : base + '/';
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={homePath}>
+      <span class="brand-mark">MF</span>
+      <span class="brand-name">Apps</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#tools">{t(locale, 'nav.tools')}</a>
+      <a href="#install">{t(locale, 'nav.install')}</a>
+      <a href="#about">{t(locale, 'nav.about')}</a>
+      <a href="https://github.com/MFApplications" rel="noopener" target="_blank">{t(locale, 'nav.github')}</a>
+    </nav>
+    <a class="lang-switch" href={altPath} hreflang={locale === 'en' ? 'es' : 'en'}>
+      {locale === 'en' ? 'ES' : 'EN'}
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    height: 64px;
+  }
+  .brand { display: flex; align-items: baseline; gap: 2px; color: var(--ink); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.25rem; }
+  .brand:hover { text-decoration: none; }
+  .brand-mark { color: var(--accent); }
+  .nav { display: flex; gap: var(--space-4); margin-left: auto; }
+  .nav a { color: var(--ink); font-size: 0.9375rem; }
+  .nav a:hover { color: var(--accent-2); text-decoration: none; }
+  .lang-switch {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--ink);
+  }
+  .lang-switch:hover { border-color: var(--accent-2); text-decoration: none; }
+  @media (max-width: 640px) {
+    .nav { display: none; }
+  }
+</style>

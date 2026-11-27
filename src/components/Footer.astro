@@ -1,0 +1,17 @@
+---
+import { t } from '../i18n/ui';
+interface Props { locale: 'en' | 'es'; }
+const { locale } = Astro.props;
+---
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>{t(locale, 'footer.license')}</p>
+    <p>{t(locale, 'footer.built')}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--border); padding: var(--space-5) 0; margin-top: var(--space-7); }
+  .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); color: var(--muted); font-size: 0.8125rem; }
+  .footer-inner p { margin: 0; }
+</style>

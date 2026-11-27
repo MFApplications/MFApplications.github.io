@@ -1,0 +1,33 @@
+---
+import { t } from '../i18n/ui';
+interface Props { locale: 'en' | 'es'; }
+const { locale } = Astro.props;
+const orgs = [
+  { name: 'Scrap-MF', url: 'https://github.com/Scrap-MF' },
+  { name: 'ExtractorsMF', url: 'https://github.com/ExtractorsMF' },
+  { name: 'AlejandraDB-MF', url: 'https://github.com/AlejandraDB-MF' },
+  { name: 'MFApplications', url: 'https://github.com/MFApplications' },
+];
+---
+<section id="about" class="section">
+  <div class="container about">
+    <div>
+      <h2>{t(locale, 'about.title')}</h2>
+      <p>{t(locale, 'about.body')}</p>
+    </div>
+    <div>
+      <h3>{t(locale, 'about.orgs')}</h3>
+      <ul class="org-list">
+        {orgs.map((o) => <li><a href={o.url} rel="noopener" target="_blank">{o.name} ↗</a></li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: var(--space-7) 0; }
+  .about { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--space-6); align-items: start; }
+  .org-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+  .org-list a { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; }
+  @media (max-width: 720px) { .about { grid-template-columns: 1fr; } }
+</style>

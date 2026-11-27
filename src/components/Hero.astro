@@ -1,0 +1,113 @@
+---
+import { t } from '../i18n/ui';
+interface Props { locale: 'en' | 'es'; }
+const { locale } = Astro.props;
+const toolNames = ['scrapmf', 'threadstractor', 'tikstractor', 'alejandradb', 'rcsyncitmf', 'eldevoracucas'];
+---
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">MFApps</p>
+      <h1>{t(locale, 'hero.title')}</h1>
+      <p class="hero-lead">{t(locale, 'hero.lead')}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#tools">{t(locale, 'hero.cta.primary')}</a>
+        <a class="btn btn-ghost" href="https://github.com/MFApplications" rel="noopener" target="_blank">{t(locale, 'hero.cta.secondary')}</a>
+      </div>
+    </div>
+    <div class="hero-terminal" aria-label={t(locale, 'hero.terminal.label')}>
+      <div class="term-bar">
+        <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+        <span class="term-title">mfapps</span>
+      </div>
+      <div class="term-body">
+        <span class="term-prompt">$</span>
+        <span class="term-typed" id="term-typed" data-tools={toolNames.join(',')}></span>
+        <span class="term-caret" aria-hidden="true"></span>
+      </div>
+      <p class="term-caption">{t(locale, 'hero.terminal.label')}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const el = document.getElementById('term-typed');
+  if (el) {
+    const tools = (el.dataset.tools || '').split(',');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      el.textContent = tools.join(' · ');
+    } else {
+      let i = 0;
+      let idx = 0;
+      let deleting = false;
+      const type = () => {
+        const word = tools[idx];
+        if (!deleting) {
+          el.textContent = word.slice(0, i + 1);
+          i++;
+          if (i === word.length) { deleting = true; setTimeout(type, 1100); return; }
+        } else {
+          el.textContent = word.slice(0, i - 1);
+          i--;
+          if (i === 0) { deleting = false; idx = (idx + 1) % tools.length; }
+        }
+        setTimeout(type, deleting ? 45 : 90);
+      };
+      type();
+    }
+  }
+</script>
+
+<style>
+  .hero { padding: var(--space-8) 0 var(--space-7); }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+  }
+  .hero-lead { font-size: 1.125rem; color: var(--muted); max-width: 52ch; }
+  .hero-actions { display: flex; gap: var(--space-3); margin-top: var(--space-5); flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 10px 18px; border-radius: var(--radius);
+    font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 0.9375rem;
+    border: 1px solid transparent; transition: border-color 150ms, transform 150ms, background 150ms;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn-primary { background: var(--ink); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent); color: #fff; }
+  .btn-ghost { border-color: var(--border); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--accent-2); }
+  .hero-terminal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .term-bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px; border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 60%, transparent);
+  }
+  .term-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+  .term-title { margin-left: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+  .term-body { padding: 24px 18px; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; min-height: 60px; }
+  .term-prompt { color: var(--accent); margin-right: 8px; }
+  .term-caret {
+    display: inline-block; width: 9px; height: 1.1em; background: var(--accent);
+    vertical-align: text-bottom; margin-left: 2px; animation: blink 1s steps(2) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .term-caption { padding: 0 18px 14px; font-size: 0.75rem; color: var(--muted); margin: 0; }
+  @media (max-width: 820px) {
+    .hero-inner { grid-template-columns: 1fr; }
+  }
+</style>

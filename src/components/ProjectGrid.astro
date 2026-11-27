@@ -1,0 +1,59 @@
+---
+import { projects, categories } from '../data/projects';
+import ProjectCard from './ProjectCard.astro';
+import { t } from '../i18n/ui';
+interface Props { locale: 'en' | 'es'; }
+const { locale } = Astro.props;
+---
+<section id="tools" class="section">
+  <div class="container">
+    <h2>{t(locale, 'tools.title')}</h2>
+    <p class="section-lead">{t(locale, 'tools.lead')}</p>
+    <div class="filters" role="tablist" aria-label="Filter projects">
+      {categories.map((c, i) => (
+        <button class={`filter ${i === 0 ? 'is-active' : ''}`} type="button" data-filter={c.id} role="tab" aria-selected={i === 0 ? 'true' : 'false'}>
+          {c.label[locale]}
+        </button>
+      ))}
+    </div>
+    <div class="grid" id="project-grid">
+      {projects.map((p) => <ProjectCard project={p} locale={locale} />)}
+    </div>
+  </div>
+</section>
+
+<script>
+  const filters = document.querySelectorAll('.filter');
+  const cards = document.querySelectorAll('#project-grid .card');
+  filters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const f = btn.getAttribute('data-filter');
+      filters.forEach((b) => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+      cards.forEach((card) => {
+        const cat = card.getAttribute('data-category');
+        (card as HTMLElement).hidden = !(f === 'all' || cat === f);
+      });
+    });
+  });
+</script>
+
+<style>
+  .section { padding: var(--space-7) 0; }
+  .section-lead { color: var(--muted); margin-bottom: var(--space-5); }
+  .filters { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-5); }
+  .filter {
+    padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px;
+    background: var(--surface); color: var(--ink); cursor: pointer; font-size: 0.8125rem;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .filter:hover { border-color: var(--accent-2); }
+  .filter.is-active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .grid {
+    display: grid; gap: var(--space-4);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+</style>
