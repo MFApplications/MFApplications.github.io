@@ -18,7 +18,10 @@ const altPath = locale === 'en' ? base + '/es/' : base + '/';
       <a href="#about">{t(locale, 'nav.about')}</a>
       <a href="https://github.com/MFApplications" rel="noopener" target="_blank">{t(locale, 'nav.github')}</a>
     </nav>
-    <a class="kofi-btn" href="https://ko-fi.com/mfapplications" rel="noopener" target="_blank">Ko-fi</a>
+    <a class="kofi-btn" href="https://ko-fi.com/mfapplications" rel="noopener" target="_blank">
+      Ko-fi
+      <img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="" height="16" style="border:0;height:16px;vertical-align:middle;margin-left:6px;" loading="lazy" />
+    </a>
     <a class="lang-switch" href={altPath} hreflang={locale === 'en' ? 'es' : 'en'}>
       {locale === 'en' ? 'ES' : 'EN'}
     </a>
@@ -56,6 +59,7 @@ const altPath = locale === 'en' ? base + '/es/' : base + '/';
   }
   .lang-switch:hover { border-color: var(--ink); text-decoration: none; }
   .kofi-btn {
+    display: inline-flex; align-items: center; gap: 4px;
     padding: 6px 12px; border-radius: var(--radius);
     background: var(--kofi); color: #fff; font-size: 0.8125rem;
     font-family: 'Space Grotesk', sans-serif; font-weight: 500;
