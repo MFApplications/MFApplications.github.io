@@ -2,8 +2,8 @@ export type Locale = 'en' | 'es';
 
 export const ui = {
   en: {
-    'site.title': 'MFApps — open-source tools for archiving, downloading, and device management',
-    'site.description': 'A catalog of open-source utilities by MFApps: social media archivers, media downloaders, Android device tools, rclone managers, and browser extensions.',
+    'site.title': 'MFApplications — open-source tools for archiving, downloading, and device management',
+    'site.description': 'A catalog of open-source utilities by MFApplications: social media archivers, media downloaders, Android device tools, rclone managers, and browser extensions.',
     'nav.tools': 'Tools',
     'nav.install': 'Install',
     'nav.about': 'About',
@@ -26,15 +26,15 @@ export const ui = {
     'install.title': 'Install in one command',
     'install.lead': 'Both CLIs ship as single binaries. No package manager required.',
     'about.title': 'About MFApps',
-    'about.body': 'MFApps is a small family of open-source projects maintained across several GitHub organizations: Scrap-MF, ExtractorsMF, AlejandraDB-MF and MFApplications. Each tool does one thing well and stays out of your way.',
+    'about.body': 'MFApplications is a small family of open-source projects maintained across several GitHub organizations: Scrap-MF, ExtractorsMF, AlejandraDB-MF and MFApplications. Each tool does one thing well and stays out of your way.',
     'about.orgs': 'Organizations',
     'footer.license': 'Released under GPL-3.0 and MIT.',
     'footer.built': 'Built with Astro.',
     'lang.switch': 'Language',
   },
   es: {
-    'site.title': 'MFApps — herramientas open source para archivar, descargar y gestionar dispositivos',
-    'site.description': 'Catálogo de utilidades open source de MFApps: archivadores de redes sociales, descargadores de media, herramientas para Android, gestores de rclone y extensiones de navegador.',
+    'site.title': 'MFApplications — herramientas open source para archivar, descargar y gestionar dispositivos',
+    'site.description': 'Catálogo de utilidades open source de MFApplications: archivadores de redes sociales, descargadores de media, herramientas para Android, gestores de rclone y extensiones de navegador.',
     'nav.tools': 'Herramientas',
     'nav.install': 'Instalar',
     'nav.about': 'Acerca de',
@@ -57,7 +57,7 @@ export const ui = {
     'install.title': 'Instala con un comando',
     'install.lead': 'Ambas CLIs se distribuyen como binarios únicos. No necesitas gestor de paquetes.',
     'about.title': 'Acerca de MFApps',
-    'about.body': 'MFApps es una pequeña familia de proyectos open source mantenidos en varias organizaciones de GitHub: Scrap-MF, ExtractorsMF, AlejandraDB-MF y MFApplications. Cada herramienta hace una sola cosa bien y no se interpone en tu camino.',
+    'about.body': 'MFApplications es una pequeña familia de proyectos open source mantenidos en varias organizaciones de GitHub: Scrap-MF, ExtractorsMF, AlejandraDB-MF y MFApplications. Cada herramienta hace una sola cosa bien y no se interpone en tu camino.',
     'about.orgs': 'Organizaciones',
     'footer.license': 'Publicado bajo GPL-3.0 y MIT.',
     'footer.built': 'Hecho con Astro.',

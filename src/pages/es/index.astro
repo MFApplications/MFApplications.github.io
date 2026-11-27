@@ -2,10 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
-import ProjectGrid from '../../components/ProjectGrid.astro';
+import FamilySection from '../../components/FamilySection.astro';
 import Install from '../../components/Install.astro';
 import About from '../../components/About.astro';
 import Footer from '../../components/Footer.astro';
+import { families } from '../../data/projects';
 import { t } from '../../i18n/ui';
 const locale = 'es';
 ---
@@ -13,7 +14,7 @@ const locale = 'es';
   <Header locale={locale} />
   <main id="main">
     <Hero locale={locale} />
-    <ProjectGrid locale={locale} />
+    {families.map((f) => <FamilySection family={f} locale={locale} />)}
     <Install locale={locale} />
     <About locale={locale} />
   </main>

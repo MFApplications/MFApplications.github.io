@@ -1,0 +1,42 @@
+---
+import { t } from '../i18n/ui';
+import ProjectCard from './ProjectCard.astro';
+import type { Family } from '../data/projects';
+interface Props { family: Family; locale: 'en' | 'es'; }
+const { family, locale } = Astro.props;
+---
+<section id={family.id} class="section family">
+  <div class="container">
+    <header class="family-head">
+      <div>
+        <p class="family-org">{family.org}</p>
+        <h2>{family.name}</h2>
+      </div>
+      <p class="family-desc">{family.description[locale]}</p>
+    </header>
+    <div class="grid">
+      {family.projects.map((p) => <ProjectCard project={p} locale={locale} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: var(--space-7) 0; }
+  .family-head {
+    display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-6);
+    align-items: end; margin-bottom: var(--space-5);
+    padding-bottom: var(--space-4); border-bottom: 1px solid var(--border);
+  }
+  .family-org {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+    color: var(--muted); margin: 0 0 var(--space-1);
+  }
+  .family-desc { color: var(--muted); margin: 0; }
+  .grid {
+    display: grid; gap: var(--space-4);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 720px) { .family-head { grid-template-columns: 1fr; } }
+</style>

@@ -3,14 +3,16 @@ import { t } from '../i18n/ui';
 import type { Project } from '../data/projects';
 interface Props { project: Project; locale: 'en' | 'es'; }
 const { project, locale } = Astro.props;
-const base = import.meta.env.BASE_URL;
 ---
-<article class="card" data-category={project.category}>
+<article class="card">
   <header class="card-head">
     <h3 class="card-name">{project.name}</h3>
-    <span class="card-org">{project.org}</span>
+    <span class="card-org">{project.repo}</span>
   </header>
   <p class="card-desc">{project.description[locale]}</p>
+  <ul class="card-features">
+    {project.features[locale].map((f) => <li>{f}</li>)}
+  </ul>
   <dl class="card-meta">
     <div><dt>Lang</dt><dd>{project.language}</dd></div>
     <div><dt>License</dt><dd>{project.license}</dd></div>
@@ -30,7 +32,6 @@ const base = import.meta.env.BASE_URL;
   </footer>
 </article>
 
-
 <style>
   .card {
     display: flex; flex-direction: column; gap: var(--space-3);
@@ -45,9 +46,14 @@ const base = import.meta.env.BASE_URL;
   .card-name { font-size: 1.125rem; }
   .card-org { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
   .card-desc { font-size: 0.9375rem; color: var(--muted); margin: 0; }
+  .card-features {
+    margin: 0; padding-left: 1.1em; color: var(--ink);
+    font-size: 0.875rem; line-height: 1.5;
+  }
+  .card-features li { margin-bottom: 2px; }
   .card-meta { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0; }
   .card-meta div { display: flex; gap: 4px; align-items: baseline; }
-  .card-meta dt { font-size: 0.75rem; color: var(--muted); text-transform: none; }
+  .card-meta dt { font-size: 0.75rem; color: var(--muted); }
   .card-meta dd { margin: 0; font-size: 0.8125rem; font-family: 'JetBrains Mono', monospace; }
   .card-install {
     display: flex; align-items: stretch; gap: 0;
